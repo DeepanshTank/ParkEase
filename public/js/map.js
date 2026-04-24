@@ -70,7 +70,7 @@ class ParkingMap {
 
         try {
           const response = await fetch(
-            "http://localhost:5000/api/bookings/my-bookings",
+            "https://parkease-563x.onrender.com/api/bookings/my-bookings",
             {
               headers: { Authorization: `Bearer ${token}` },
             },
@@ -194,8 +194,8 @@ class ParkingMap {
 
     try {
       const url = currentCity
-        ? `http://localhost:5000/api/parking/spots?city=${encodeURIComponent(currentCity)}`
-        : "http://localhost:5000/api/parking/spots";
+        ? `https://parkease-563x.onrender.com/api/parking/spots?city=${encodeURIComponent(currentCity)}`
+        : "https://parkease-563x.onrender.com/api/parking/spots";
 
       const response = await fetch(url, {
         method: "GET",
@@ -229,7 +229,7 @@ class ParkingMap {
           let userBookedSpotIds = [];
           try {
             const bookingsResponse = await fetch(
-              "http://localhost:5000/api/bookings/my-bookings",
+              "https://parkease-563x.onrender.com/api/bookings/my-bookings",
               {
                 headers: { Authorization: `Bearer ${token}` },
               },
@@ -388,7 +388,7 @@ class ParkingMap {
     for (let spot of this.parkingSpots) {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/parking/availability/${spot.id}`,
+          `https://parkease-563x.onrender.com/api/parking/availability/${spot.id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           },
@@ -571,7 +571,7 @@ class ParkingMap {
     }
 
     try {
-        const orderRes = await fetch('http://localhost:5000/api/payment/create-order', {
+        const orderRes = await fetch('https://parkease-563x.onrender.com/api/payment/create-order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({ amount: totalAmount })
@@ -591,7 +591,7 @@ class ParkingMap {
             description: `Booking for ${this.selectedSpot.name}`,
             order_id: orderData.order.id,
             handler: async (response) => {
-                const verifyRes = await fetch('http://localhost:5000/api/payment/verify', {
+                const verifyRes = await fetch('https://parkease-563x.onrender.com/api/payment/verify', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify({
