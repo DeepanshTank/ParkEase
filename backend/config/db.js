@@ -1,15 +1,21 @@
-import pkg from "pg";
+import pkg from 'pg';
 const { Pool } = pkg;
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Only use DATABASE_URL – no individual DB variables
 const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+});
+
+pool.connect((err) => {
+    if (err) {
+        console.error('❌ DB connection error:', err.message);
+    } else {
+        console.log('✅ DB connected');
+    }
 });
 
 export default pool;
