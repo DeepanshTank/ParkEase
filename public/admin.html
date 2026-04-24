@@ -539,24 +539,24 @@
         }
 
         async function updateSpot(id, spotData) {
-            const token = localStorage.getItem('adminToken');
-            try {
-                const res = await fetch(`http://localhost:5000/api/admin/spots/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                    body: JSON.stringify(spotData)
-                });
-                const data = await res.json();
-                if (data.success) {
-                    showToast('Spot updated successfully!', 'success');
-                    loadSpots();
-                } else {
-                    showToast(data.message || 'Update failed', 'error');
-                }
-            } catch (error) {
-                showToast('Error updating spot', 'error');
-            }
+    const token = localStorage.getItem('adminToken');
+    try {
+        const res = await fetch(`https://parkease-563x.onrender.com/api/admin/spots/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify(spotData)
+        });
+        const data = await res.json();
+        if (data.success) {
+            showToast('Spot updated successfully!', 'success');
+            loadSpots();
+        } else {
+            showToast(data.message || 'Update failed', 'error');
         }
+    } catch (error) {
+        showToast('Error updating spot', 'error');
+    }
+}
 
         async function adminLogin() {
             const email = document.getElementById('adminEmail').value.trim();
@@ -564,7 +564,7 @@
             if (!email || !pwd) { showToast('Enter email and password', 'error'); return; }
             showToast('Logging in...', 'info');
             try {
-                const res = await fetch('http://localhost:5000/api/admin/login', {
+                const res = await fetch('https://parkease-563x.onrender.com/api/admin/login', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password: pwd })
                 });
@@ -588,7 +588,7 @@
             const token = localStorage.getItem('adminToken');
             if (!token) return;
             try {
-                const res = await fetch('http://localhost:5000/api/admin/spots', { headers: { 'Authorization': `Bearer ${token}` } });
+                const res = await fetch('https://parkease-563x.onrender.com/api/admin/spots', { headers: { 'Authorization': `Bearer ${token}` } });
                 const data = await res.json();
                 if (data.success) {
                     document.getElementById('spotsList').innerHTML = data.spots.map(s => `
@@ -614,7 +614,7 @@
         async function deleteSpot(id) {
             const token = localStorage.getItem('adminToken');
             try {
-                const res = await fetch(`http://localhost:5000/api/admin/spots/${id}`, {
+                const res = await fetch(`https://parkease-563x.onrender.com/api/admin/spots/${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -645,7 +645,7 @@
             };
 
             try {
-                const res = await fetch('http://localhost:5000/api/admin/spots', {
+                const res = await fetch('https://parkease-563x.onrender.com/api/admin/spots', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify(spot)

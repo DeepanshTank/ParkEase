@@ -22,8 +22,9 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/payment', paymentRoutes);  // ✅ Payment route register
 
+
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'OK', message: 'Server running' });
+    res.json({ status: 'OK', message: 'ParkEase Backend Running' });
 });
 
 app.listen(PORT, () => {
